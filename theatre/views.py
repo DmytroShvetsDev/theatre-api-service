@@ -7,7 +7,15 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from theatre.models import Genre, Actor, TheatreHall, Play, Performance
+from theatre.models import (
+    Genre,
+    Actor,
+    TheatreHall,
+    Play,
+    Performance,
+    Reservation,
+)
+
 from theatre.serializers import (
     GenreSerializer,
     ActorSerializer,
@@ -19,6 +27,8 @@ from theatre.serializers import (
     PerformanceSerializer,
     PerformanceListSerializer,
     PerformanceDetailSerializer,
+    ReservationSerializer,
+    ReservationListSerializer,
 )
 
 
@@ -150,3 +160,26 @@ class PerformanceViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(play_id=int(play_id_str))
 
         return queryset
+
+
+class ReservationViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    GenericViewSet,
+):
+    queryset = Reservation.objects.prefetch_related(
+        "tickets__performance__play", "tickets__performance__theatre_hall"
+    )
+    serializer_class = ReservationSerializer
+
+    def get_queryset(self):
+        return Reservation.objects.filter(user=self.request.user)
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return ReservationListSerializer
+
+        return ReservationSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

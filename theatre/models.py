@@ -89,7 +89,7 @@ class Ticket(models.Model):
     performance = models.ForeignKey(
         Performance, on_delete=models.CASCADE, related_name="tickets"
     )
-    order = models.ForeignKey(
+    reservation = models.ForeignKey(
         Reservation, on_delete=models.CASCADE, related_name="tickets"
     )
     row = models.IntegerField()
