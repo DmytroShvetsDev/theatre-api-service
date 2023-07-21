@@ -1,12 +1,12 @@
 
-from rest_framework import mixins
+from rest_framework import mixins, viewsets
 from rest_framework.viewsets import GenericViewSet
 
-from theatre.models import Genre, Actor, TheatreHall
+from theatre.models import Genre, Actor, TheatreHall, Play
 from theatre.serializers import (
     GenreSerializer,
     ActorSerializer,
-    TheatreHallSerializer,
+    TheatreHallSerializer, PlaySerializer,
 )
 
 
@@ -35,3 +35,13 @@ class TheatreHallViewSet(
 ):
     queryset = TheatreHall.objects.all()
     serializer_class = TheatreHallSerializer
+
+
+class PlayViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
+    queryset = Play.objects.prefetch_related("genres", "actors")
+    serializer_class = PlaySerializer
