@@ -193,7 +193,8 @@ class AdminplayApiTests(TestCase):
         payload = {
             "title": "Spider Man",
             "genres": [genre1.id, genre2.id],
-            "description": "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help.",
+            "description": "With Spider-Man's identity now revealed, "
+                           "Peter asks Doctor Strange for help.",
         }
         res = self.client.post(PLAY_URL, payload)
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
@@ -210,7 +211,8 @@ class AdminplayApiTests(TestCase):
         payload = {
             "title": "Spider Man",
             "actors": [actor1.id, actor2.id],
-            "description": "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help.",
+            "description": "With Spider-Man's identity now revealed, "
+                           "Peter asks Doctor Strange for help.",
         }
         res = self.client.post(PLAY_URL, payload)
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)

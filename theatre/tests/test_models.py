@@ -14,6 +14,7 @@ from theatre.models import (
     Ticket,
 )
 
+
 def sample_play(**params):
     defaults = {
         "title": "Sample play",
@@ -108,4 +109,6 @@ class ModelsTests(TestCase):
             ticket.clean()
         except ValidationError:
             self.fail("validate_ticket raised ValidationError incorrectly.")
-        self.assertEqual(str(ticket), f"{str(ticket.performance)} (row: {ticket.row}, seat: {ticket.seat})")
+        self.assertEqual(str(ticket),
+                         f"{str(ticket.performance)} "
+                         f"(row: {ticket.row}, seat: {ticket.seat})")
