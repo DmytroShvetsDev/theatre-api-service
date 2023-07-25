@@ -32,7 +32,7 @@ class Actor(models.Model):
     last_name = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return f"{self.first_name} {self.last_name}"
 
     @property
     def full_name(self):
@@ -69,7 +69,7 @@ class Performance(models.Model):
         ordering = ["-show_time"]
 
     def __str__(self):
-        return self.play.title + " " + str(self.show_time)
+        return f"{self.play.title} {self.show_time}"
 
 
 class Reservation(models.Model):
@@ -79,7 +79,7 @@ class Reservation(models.Model):
     )
 
     def __str__(self):
-        return str(self.created_at)
+        return self.created_at
 
     class Meta:
         ordering = ["-created_at"]
@@ -134,7 +134,7 @@ class Ticket(models.Model):
 
     def __str__(self):
         return (
-            f"{str(self.performance)} (row: {self.row}, seat: {self.seat})"
+            f"{self.performance} (row: {self.row}, seat: {self.seat})"
         )
 
     class Meta:
