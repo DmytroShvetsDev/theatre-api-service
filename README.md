@@ -39,6 +39,8 @@ python manage.py runserver
 ## Run with docker
 
 Docker must be already installed!
+
+Uncomment string `MEDIA_ROOT = "/vol/web/media"` in setting.py 
     
 ```shell
 git clone https://github.com/dirolius/theatre-api-service
