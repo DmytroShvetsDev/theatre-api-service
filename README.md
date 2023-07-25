@@ -83,7 +83,7 @@ To work with token use:
 - value: Bearer `<token>`
 
 
-### theatre API allows:
+### Theatre API allows:
 - using api/admin/ --- Work with admin panel
 - using /api/doc/swagger/ --- Detail api documentation by swagger
 - using /api/doc/redoc/ --- Detail api documentation by redoc
